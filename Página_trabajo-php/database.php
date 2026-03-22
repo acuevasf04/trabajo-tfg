@@ -1,9 +1,9 @@
 <?php
 
-define('DB_HOST', 'localhost');
+define('DB_HOST', '10.20.40.11');
 define('DB_NAME', 'aromaris_db');   // nombre de tu BD
-define('DB_USER', 'tu_usuario');    // usuario MariaDB
-define('DB_PASS', 'tu_contraseña'); // contraseña MariaDB
+define('DB_USER', 'antonio');    // usuario MariaDB
+define('DB_PASS', '123456789'); // contraseña MariaDB
 define('DB_PORT', '3306');
 
 function conectar(): ?PDO {
