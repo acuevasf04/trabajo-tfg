@@ -1,4 +1,263 @@
-<?php // index.php — Aromaris con Bootstrap 5 ?>
+<?php // index.php — Aromaris, solo Bootstrap 5, sin JS ni CSS propio ?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aromaris — Jabones Artesanales</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400&display=swap" rel="stylesheet"/>
+  <style>
+    body { font-family: 'Jost', sans-serif; font-weight: 300; background: #faf8f4; }
+    .font-display { font-family: 'Cormorant Garamond', serif; }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg bg-light border-bottom sticky-top px-4">
+  <a class="navbar-brand font-display fs-3 fw-light text-dark" href="#">Aromaris</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navMenu">
+    <ul class="navbar-nav mx-auto gap-lg-3">
+      <li class="nav-item"><a class="nav-link text-dark" href="#productos">Productos</a></li>
+      <li class="nav-item"><a class="nav-link text-dark" href="#nosotros">Nosotros</a></li>
+      <li class="nav-item"><a class="nav-link text-dark" href="#ingredientes">Ingredientes</a></li>
+      <li class="nav-item"><a class="nav-link text-dark" href="login.php">Mi cuenta</a></li>
+    </ul>
+    <a href="#productos" class="btn btn-danger rounded-0 mt-2 mt-lg-0">Ver colección</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="container-fluid p-0">
+  <div class="row g-0">
+
+    <div class="col-lg-6 bg-light d-flex align-items-center">
+      <div class="p-5">
+        <p class="text-danger small text-uppercase letter-spacing mb-3">Jabones artesanales · Desde 2018</p>
+        <h1 class="font-display display-3 fw-light lh-1 mb-4">
+          El ritual<br>de cuidarte<br><em class="text-danger">cada día</em>
+        </h1>
+        <p class="text-muted mb-4" style="max-width:380px; line-height:1.85;">
+          Elaborados a mano con ingredientes naturales, esencias puras y aceites botánicos.
+          Cada jabón es una experiencia sensorial única para tu piel y tu bienestar.
+        </p>
+        <div class="d-flex flex-wrap gap-3">
+          <a href="#productos" class="btn btn-danger rounded-0 px-4 py-2">Explorar colección</a>
+          <a href="#nosotros"  class="btn btn-outline-dark rounded-0 px-4 py-2">Nuestra historia</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6 p-0" style="min-height:520px; overflow:hidden;">
+      <img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=900&auto=format&fit=crop"
+           alt="Jabones Aromaris" class="w-100 h-100 object-fit-cover"/>
+    </div>
+
+  </div>
+</section>
+
+<!-- BANDA -->
+<div class="bg-dark text-light py-3">
+  <div class="container">
+    <div class="row text-center g-2">
+      <?php
+      $feats = [
+        ["bi-leaf",             "Ingredientes naturales"],
+        ["bi-hand-index-thumb", "Elaboración artesanal"],
+        ["bi-box-seam",         "Envío en 24–48h"],
+        ["bi-heart",            "Cruelty free"],
+      ];
+      foreach ($feats as $f): ?>
+      <div class="col-6 col-md-3">
+        <span class="small text-uppercase">
+          <i class="bi <?= $f[0] ?> me-1"></i><?= $f[1] ?>
+        </span>
+      </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCTOS -->
+<section id="productos" class="py-5">
+  <div class="container">
+
+    <div class="d-flex justify-content-between align-items-end mb-5">
+      <div>
+        <p class="text-danger small text-uppercase mb-1">Colección 2025</p>
+        <h2 class="font-display fw-light display-6 mb-0">Nuestros jabones</h2>
+      </div>
+      <a href="#" class="text-dark text-decoration-none small text-uppercase border-bottom">Ver todos →</a>
+    </div>
+
+    <div class="row g-4">
+      <?php
+      $productos = [
+        ["Rosa & Argán",      "Pétalos de rosa · Aceite de argán", "9,90 €","Más vendido","https://images.unsplash.com/photo-1602526432604-029a709e131b?w=400&auto=format&fit=crop"],
+        ["Lavanda Provenzal", "Lavanda · Manteca de karité",        "8,50 €","",           "https://images.unsplash.com/photo-1619451819080-d8c7a97ce673?w=400&auto=format&fit=crop"],
+        ["Citrus & Menta",    "Naranja dulce · Menta piperita",     "8,90 €","Nuevo",      "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400&auto=format&fit=crop"],
+        ["Vainilla & Coco",   "Vainilla natural · Aceite de coco",  "9,50 €","",           "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=400&auto=format&fit=crop"],
+      ];
+      foreach ($productos as $p): ?>
+      <div class="col-6 col-lg-3">
+        <div class="position-relative mb-3" style="aspect-ratio:3/4; overflow:hidden;">
+          <img src="<?= htmlspecialchars($p[4]) ?>"
+               alt="<?= htmlspecialchars($p[0]) ?>"
+               class="w-100 h-100 object-fit-cover"/>
+          <?php if ($p[3]): ?>
+            <span class="position-absolute top-0 start-0 m-2 badge bg-danger rounded-0">
+              <?= htmlspecialchars($p[3]) ?>
+            </span>
+          <?php endif; ?>
+        </div>
+        <p class="font-display fs-5 mb-1"><?= htmlspecialchars($p[0]) ?></p>
+        <p class="text-muted small mb-1"><?= htmlspecialchars($p[1]) ?></p>
+        <p class="text-danger mb-0"><?= htmlspecialchars($p[2]) ?></p>
+      </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
+
+<!-- NOSOTROS -->
+<section id="nosotros" class="bg-light">
+  <div class="row g-0">
+
+    <div class="col-lg-6" style="min-height:460px; overflow:hidden;">
+      <img src="https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=800&auto=format&fit=crop"
+           alt="Taller Aromaris" class="w-100 h-100 object-fit-cover"/>
+    </div>
+
+    <div class="col-lg-6 d-flex align-items-center">
+      <div class="p-5">
+        <p class="text-danger small text-uppercase mb-2">Nuestra historia</p>
+        <h2 class="font-display fw-light display-6 mb-4">
+          Hechos con<br><em>amor y propósito</em>
+        </h2>
+        <p class="text-muted" style="line-height:1.9;">
+          Aromaris nació en un pequeño obrador familiar con una sola convicción:
+          que los productos de cuidado personal deben ser buenos para ti y para el planeta.
+        </p>
+        <p class="text-muted mt-3" style="line-height:1.9;">
+          Usamos aceites vegetales prensados en frío, esencias 100&nbsp;% puras y colorantes
+          naturales. Cada pastilla pasa por un curado artesanal de cuatro semanas.
+        </p>
+        <div class="d-flex gap-4 mt-4">
+          <div>
+            <span class="font-display display-6 text-danger">+6K</span>
+            <p class="small text-uppercase text-muted mb-0">Clientes felices</p>
+          </div>
+          <div>
+            <span class="font-display display-6 text-danger">28</span>
+            <p class="small text-uppercase text-muted mb-0">Fragancias</p>
+          </div>
+          <div>
+            <span class="font-display display-6 text-danger">7</span>
+            <p class="small text-uppercase text-muted mb-0">Años de oficio</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- INGREDIENTES -->
+<section id="ingredientes" class="py-5">
+  <div class="container">
+    <div class="text-center mb-5">
+      <p class="text-danger small text-uppercase mb-2">Lo que usamos</p>
+      <h2 class="font-display fw-light display-6">Ingredientes estrella</h2>
+    </div>
+    <div class="row g-3">
+      <?php
+      $ings = [
+        ["🫒","Aceite de oliva","Base nutritiva y suavizante. Rico en vitamina E y antioxidantes."],
+        ["🌹","Rosa mosqueta","Regenerador celular. Aporta luminosidad y reduce marcas."],
+        ["🥥","Aceite de coco","Antibacteriano natural. Deja la piel sedosa y protegida."],
+        ["💜","Lavanda francesa","Calmante y antiséptica. Ideal para pieles sensibles."],
+        ["🌿","Manteca de karité","Hidratación intensa de larga duración."],
+        ["🍊","Aceites cítricos","Revitalizantes y purificantes. Aroma fresco y energizante."],
+      ];
+      foreach ($ings as $i): ?>
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="border p-4 text-center h-100 bg-white">
+          <span class="fs-2 d-block mb-3"><?= $i[0] ?></span>
+          <h3 class="font-display fw-normal fs-5 mb-2"><?= htmlspecialchars($i[1]) ?></h3>
+          <p class="text-muted small mb-0"><?= htmlspecialchars($i[2]) ?></p>
+        </div>
+      </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="bg-dark text-white text-center py-5">
+  <div class="container">
+    <p class="text-secondary small text-uppercase mb-2">Novedades &amp; ofertas</p>
+    <h2 class="font-display fw-light display-6 mb-3">
+      Únete a la comunidad<br><em>Aromaris</em>
+    </h2>
+    <p class="text-secondary mb-4 mx-auto" style="max-width:380px;">
+      Suscríbete y recibe un 10&nbsp;% de descuento en tu primer pedido.
+    </p>
+    <form class="d-flex justify-content-center mx-auto gap-0" style="max-width:400px;" action="#" method="post">
+      <input type="email" name="email" placeholder="tu@email.com" required
+             class="form-control rounded-0 border-secondary bg-transparent text-white"/>
+      <button type="submit" class="btn btn-danger rounded-0 px-3">Suscribirme</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="py-5" style="background:#1e1b18;">
+  <div class="container">
+    <div class="row g-4 mb-4">
+      <div class="col-12 col-md-4">
+        <span class="font-display fs-2 fw-light text-light d-block mb-2">Aromaris</span>
+        <p class="text-secondary small">
+          Jabones artesanales elaborados con ingredientes naturales desde 2018.
+        </p>
+      </div>
+      <?php
+      $fcols = [
+        "Tienda"      => ["Todos los productos","Novedades","Packs regalo","Ofertas"],
+        "Información" => ["Sobre nosotros","Ingredientes","Sostenibilidad","Blog"],
+        "Ayuda"       => ["Envíos y devoluciones","Preguntas frecuentes","Contacto","Mi cuenta"],
+      ];
+      foreach ($fcols as $title => $links): ?>
+      <div class="col-6 col-md-2">
+        <h6 class="text-uppercase text-secondary small mb-3"><?= $title ?></h6>
+        <ul class="list-unstyled mb-0">
+          <?php foreach ($links as $l): ?>
+          <li class="mb-2">
+            <a href="#" class="text-secondary text-decoration-none small"
+               onmouseover="this.classList.add('text-light')"
+               onmouseout="this.classList.remove('text-light')">
+              <?= htmlspecialchars($l) ?>
+            </a>
+          </li>
+          <?php endforeach; ?>
+        </ul>
+      </div>
+      <?php endforeach; ?>
+    </div>
+    <hr class="border-secondary">
+    <div class="d-flex flex-column flex-md-row justify-content-between small text-secondary pt-2 gap-2">
+      <span>© <?= date('Y') ?> Aromaris. Todos los derechos reservados.</span>
+      <span>Hecho con 🌿 y cuidado artesanal</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html><?php // index.php — Aromaris con Bootstrap 5 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
